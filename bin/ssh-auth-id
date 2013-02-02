@@ -29,18 +29,24 @@ parser.add_argument('userids', nargs='+', metavar="USERID", help='User IDs to im
 parser.options = None
 
 def die(msg):
-	"""The only function worth calling in Perl."""
+	"""
+	The only thing in Perl worth keeping.
+	"""
 	print >>sys.stderr, "ERROR: %s" % (msg)
 	os._exit(1)
 
 def is_key(fields):
+	"""
+	Test if this sequence looks like a whitespace-split
+	SSH public key.
+	"""
 	if not fields:
 		return False
 	if len(fields) < 3:
 		return False
 	if not fields[0].startswith('ssh-'):
 		return False
-	# TODO: decode and validate public key material too?
+	# TODO: decode and validate public key material too
 	return True
 
 def import_keys(proto, username):
@@ -87,17 +93,22 @@ def import_keys(proto, username):
 	return result
 
 if __name__ == '__main__':
-	parser.options = parser.parse_args()
-	keys = []
-	for userid in parser.options.userids:
-		user_pieces = userid.split(':')
-		if len(user_pieces) == 2:
-			proto, username = user_pieces
-		elif len(user_pieces) == 1:
-			proto, username = DEFAULT_PROTO, userid
-		else:
-			die("Invalid user ID: [%s]" % (userid))
-		keys.extend(import_keys(proto, username))
-	print >>sys.stderr, "Imported %d keys from %s" % (
-		len(keys), ",".join(parser.options.userids))
+	try:
+		parser.options = parser.parse_args()
+		keys = []
+		for userid in parser.options.userids:
+			user_pieces = userid.split(':')
+			if len(user_pieces) == 2:
+				proto, username = user_pieces
+			elif len(user_pieces) == 1:
+				proto, username = DEFAULT_PROTO, userid
+			else:
+				die("Invalid user ID: [%s]" % (userid))
+			keys.extend(import_keys(proto, username))
+		print >>sys.stderr, "Imported %d keys from %s" % (
+			len(keys), ",".join(parser.options.userids))
+	except Exception, wtf:
+		die(str(wtf))
+	except BaseException, wtf:
+		die(str(wtf))
 	os._exit(0)

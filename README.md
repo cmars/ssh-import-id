@@ -2,14 +2,13 @@
 ssh-auth-id
 ===========
 
-You're logged onto an EC2 instance, working on a problem with your fellow devs, and you want to invite them to log in and take a look at these crazy log messages. What do?
+You're logged onto a cloud instance working on a problem with your fellow devs, and you want to invite them to log in and take a look at these crazy log messages. What do?
 
 Oh. You have to ask them to cat their public SSH key, paste it into IRC (wait, no, it's id\_rsa.pub, not id\_rsa silly!) then you copy it and cat it to the end of authorized\_hosts.
 
 That's where ssh-auth-id comes in. With ssh-auth-id, you can add the public SSH keys from a known, trusted online identity to grant SSH access.
 
 Currently supported identities include Launchpad (https://launchpad.net) and of course, Github!
-
 
 Usage
 -----
@@ -34,15 +33,32 @@ ssh-auth-id uses short prefix to indicate the location of the online identity. F
 Example
 -------
 
+If you wanted me to be able to ssh into your server, as the desired user on that machine you would use:
+
  $ ssh-auth-id gh:cmars
 
-Would grant me access to log into your machine. Rather, it would grant access to the public keys I have registered with Github. So, you probably don't want to do that, since you're not paying me to look at those logs... but you get the idea.
+Used with care, it's a great collaboration tool!
 
-Used with care, it is a great collaboration tool!
+Installing
+----------
 
+ssh-auth-id can be installed pretty much anywhere with a recent version of pip:
+
+ $ pip install ssh-auth-id
+
+ssh-auth-id requires a recent version of Requests (>=1.1.0) for verified SSL/TLS connections.
+
+Extending
+---------
+
+You can add support for your own SSH public key providers by creating a script named ssh-auth-id-<prefix>. Make the script executable and place it in the same bin directory as ssh-auth-id.
+
+The script should accept the identity username for the service it connects to, and output lines in the same format as an ~/.ssh/authorized\_keys file.
+
+If you do develop such a service, I recommend that you connect to the service with SSL/TLS, and require a valid certificate and matching hostname. Use Requests.get(url, verify=True), for example.
 
 Credits
 -------
 
-This project is a port of https://launchpad.net/ssh-import-id, written by Dustin Kirkland.
+This project is pretty much a port of https://launchpad.net/ssh-import-id, written by Dustin Kirkland and Scott Moser.
 
