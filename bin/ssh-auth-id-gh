@@ -22,11 +22,11 @@ import urllib
 
 if __name__ == '__main__':
 	if not sys.argv[:1]:
-		print >>sys.stderr, "Usage: %s <github-id>" % (sys.argv[0])
+		sys.stderr.write("Usage: %s <github-id>\n" % (sys.argv[0]))
 		os._exit(1)
 	ghid = sys.argv[1]
 	url = "https://api.github.com/users/%s/keys" % (urllib.quote_plus(ghid))
 	resp = requests.get(url, verify=True)
 	data = json.loads(resp.content)
 	for keyobj in data:
-		print "%s %s@github/%s" % (keyobj['key'], ghid, keyobj['id'])
+		sys.stdout.write("%s %s@github/%s\n" % (keyobj['key'], ghid, keyobj['id']))

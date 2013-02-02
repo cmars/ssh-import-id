@@ -32,7 +32,7 @@ def die(msg):
 	"""
 	The only thing in Perl worth keeping.
 	"""
-	print >>sys.stderr, "ERROR: %s" % (msg)
+	sys.stderr.write("ERROR: %s\n" % (msg))
 	os._exit(1)
 
 def is_key(fields):
@@ -105,8 +105,9 @@ if __name__ == '__main__':
 			else:
 				die("Invalid user ID: [%s]" % (userid))
 			keys.extend(import_keys(proto, username))
-		print >>sys.stderr, "Imported %d keys from %s" % (
-			len(keys), ",".join(parser.options.userids))
-	except Exception, wtf:
-		die(str(wtf))
+		sys.stderr.write("Imported %d keys from %s\n" % (
+			len(keys), ",".join(parser.options.userids)))
+	except (Exception,):
+		e = sys.exc_info()[1]
+		die(str(e.errormsg))
 	os._exit(0)
