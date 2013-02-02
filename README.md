@@ -18,24 +18,24 @@ ssh-auth-id uses short prefix to indicate the location of the online identity. F
 	'gh:' for Github
 	'lp:' for Launchpad
 
- usage: ssh-auth-id [-h] [-o FILE] USERID [USERID ...]
-
- Authorize SSH public keys from trusted online identities.
-
- positional arguments:
-   USERID                User IDs to import
-
- optional arguments:
-   -h, --help            show this help message and exit
-   -o FILE, --output FILE
-                         Write output to file (default ~/.ssh/authorized_keys)
+	usage: ssh-auth-id [-h] [-o FILE] USERID [USERID ...]
+	
+	Authorize SSH public keys from trusted online identities.
+	
+	positional arguments:
+  	USERID                User IDs to import
+	
+	optional arguments:
+  	-h, --help            show this help message and exit
+  	-o FILE, --output FILE
+                        	Write output to file (default ~/.ssh/authorized_keys)
 
 Example
 -------
 
 If you wanted me to be able to ssh into your server, as the desired user on that machine you would use:
 
- $ ssh-auth-id gh:cmars
+	$ ssh-auth-id gh:cmars
 
 Used with care, it's a great collaboration tool!
 
@@ -44,7 +44,7 @@ Installing
 
 ssh-auth-id can be installed pretty much anywhere with a recent version of pip:
 
- $ pip install ssh-auth-id
+	$ pip install ssh-auth-id
 
 ssh-auth-id requires a recent version of Requests (>=1.1.0) for verified SSL/TLS connections.
 
