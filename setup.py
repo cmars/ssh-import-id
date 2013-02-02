@@ -23,5 +23,5 @@ setup(name='ssh-auth-id',
 	author_email='casey.marshall@gmail.com',
 	url='http://github.com/cmars/ssh-auth-id',
 	scripts=['bin/ssh-auth-id', 'bin/ssh-auth-id-gh', 'bin/ssh-auth-id-lp'],
-	install_requires=["Requests>=1.1.0"],
+	install_requires=["argparse", "Requests>=1.1.0"],
 )
