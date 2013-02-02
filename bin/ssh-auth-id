@@ -109,6 +109,4 @@ if __name__ == '__main__':
 			len(keys), ",".join(parser.options.userids))
 	except Exception, wtf:
 		die(str(wtf))
-	except BaseException, wtf:
-		die(str(wtf))
 	os._exit(0)
