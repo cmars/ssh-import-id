@@ -17,7 +17,7 @@
 from setuptools import setup
 
 setup(name='ssh-auth-id',
-	version='1.0',
+	version='1.0.1',
 	description='Authorize SSH public keys from trusted online identities',
 	author='Casey Marshall',
 	author_email='casey.marshall@gmail.com',
