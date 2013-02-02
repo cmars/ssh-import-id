@@ -17,14 +17,17 @@
 import os
 import requests
 import sys
-import urllib
+try:
+	from urllib import quote_plus
+except (ImportError,):
+	from urllib.parse import quote_plus
 
 if __name__ == '__main__':
 	if not sys.argv[:1]:
 		sys.stderr.write("Usage: %s <launchpad-id>\n" % (sys.argv[0]))
 		os._exit(1)
 	lpid = sys.argv[1]
-	url = "https://launchpad.net/~%s/+sshkeys" % (urllib.quote_plus(lpid))
+	url = "https://launchpad.net/~%s/+sshkeys" % (quote_plus(lpid))
 	resp = requests.get(url, verify=True)
-	sys.stdout.write(resp.content)
+	sys.stdout.write(str(resp.content))
 	sys.stdout.write("\n")

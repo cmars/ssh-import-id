@@ -44,7 +44,7 @@ def is_key(fields):
 		return False
 	if len(fields) < 3:
 		return False
-	if not fields[0].startswith('ssh-'):
+	if not str(fields[0]).startswith(str('ssh-')):
 		return False
 	# TODO: decode and validate public key material too
 	return True
@@ -109,5 +109,5 @@ if __name__ == '__main__':
 			len(keys), ",".join(parser.options.userids)))
 	except (Exception,):
 		e = sys.exc_info()[1]
-		die(str(e.errormsg))
+		die("%s" % (str(e)))
 	os._exit(0)
