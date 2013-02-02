@@ -51,7 +51,7 @@ ssh-auth-id requires a recent version of Requests (>=1.1.0) for verified SSL/TLS
 Extending
 ---------
 
-You can add support for your own SSH public key providers by creating a script named ssh-auth-id-<prefix>. Make the script executable and place it in the same bin directory as ssh-auth-id.
+You can add support for your own SSH public key providers by creating a script named ssh-auth-id-*prefix*. Make the script executable and place it in the same bin directory as ssh-auth-id.
 
 The script should accept the identity username for the service it connects to, and output lines in the same format as an ~/.ssh/authorized\_keys file.
 
