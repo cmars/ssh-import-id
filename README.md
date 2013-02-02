@@ -18,6 +18,8 @@ ssh-auth-id uses short prefix to indicate the location of the online identity. F
 	'gh:' for Github
 	'lp:' for Launchpad
 
+Command line help:
+
 	usage: ssh-auth-id [-h] [-o FILE] USERID [USERID ...]
 	
 	Authorize SSH public keys from trusted online identities.
