@@ -27,7 +27,14 @@ if __name__ == '__main__':
 		sys.stderr.write("Usage: %s <launchpad-id>\n" % (sys.argv[0]))
 		os._exit(1)
 	lpid = sys.argv[1]
-	url = "https://launchpad.net/~%s/+sshkeys" % (quote_plus(lpid))
-	resp = requests.get(url, verify=True)
-	sys.stdout.write(str(resp.text))
-	sys.stdout.write("\n")
+	try:
+		url = "https://launchpad.net/~%s/+sshkeys" % (quote_plus(lpid))
+		resp = requests.get(url, verify=True)
+		sys.stdout.write(str(resp.text))
+		sys.stdout.write("\n")
+		sys.stdout.flush()
+		os._exit(0)
+	except (Exception,):
+		e = sys.exc_info()[1]
+		sys.stderr.write("ERROR: %s\n" % (str(e)))
+		os._exit(1)

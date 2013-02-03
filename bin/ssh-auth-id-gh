@@ -28,8 +28,15 @@ if __name__ == '__main__':
 		sys.stderr.write("Usage: %s <github-id>\n" % (sys.argv[0]))
 		os._exit(1)
 	ghid = sys.argv[1]
-	url = "https://api.github.com/users/%s/keys" % (quote_plus(ghid))
-	resp = requests.get(url, verify=True)
-	data = json.loads(resp.text)
-	for keyobj in data:
-		sys.stdout.write("%s %s@github/%s\n" % (keyobj['key'], ghid, keyobj['id']))
+	try:
+		url = "https://api.github.com/users/%s/keys" % (quote_plus(ghid))
+		resp = requests.get(url, verify=True)
+		data = json.loads(resp.text)
+		for keyobj in data:
+			sys.stdout.write("%s %s@github/%s\n" % (keyobj['key'], ghid, keyobj['id']))
+		sys.stdout.flush()
+		os._exit(0)
+	except (Exception,):
+		e = sys.exc_info()[1]
+		sys.stderr.write("ERROR: %s\n" % (str(e)))
+		os._exit(1)
