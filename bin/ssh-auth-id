@@ -82,7 +82,7 @@ def import_keys(proto, username):
 	with open(output_file, "a+") as f:
 		for line in proc_output.splitlines():
 			# Validate/clean-up key text
-			line = line.strip()
+			line = line.decode('utf-8').strip()
 			fields = line.split()
 			if is_key(fields):
 				_, key_pub, _ = fields
