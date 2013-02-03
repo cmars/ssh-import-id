@@ -29,5 +29,5 @@ if __name__ == '__main__':
 	lpid = sys.argv[1]
 	url = "https://launchpad.net/~%s/+sshkeys" % (quote_plus(lpid))
 	resp = requests.get(url, verify=True)
-	sys.stdout.write(str(resp.content))
+	sys.stdout.write(str(resp.text))
 	sys.stdout.write("\n")
