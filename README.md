@@ -44,7 +44,7 @@ Used with care, it's a great collaboration tool!
 Installing
 ----------
 
-ssh-import-id can be installed pretty much anywhere with a recent version of pip:
+ssh-import-id can be installed on Python >= 2.6 with a recent version of pip:
 
 	$ pip install ssh-import-id
 
